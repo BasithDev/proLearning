@@ -26,10 +26,10 @@ const NoResultsFound = ({ searchQuery }) => (
                 />
             </svg>
         </div>
-        <h3 className="text-xl font-semibold text-gray-700 mb-2">
+        <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-2">
             No topics found
         </h3>
-        <p className="text-gray-500 max-w-md mx-auto">
+        <p className="text-gray-500 dark:text-gray-400 max-w-md mx-auto">
             We couldn't find any topics matching "{searchQuery}". 
             Try searching with different keywords or browse our available topics.
         </p>
@@ -100,7 +100,7 @@ const Home = () => {
         }
     ]
 
-    const [visibleCount, setVisibleCount] = useState(8)
+    const [visibleCount, setVisibleCount] = useState(5)
     const [searchQuery, setSearchQuery] = useState('')
     const debouncedSearchQuery = useDebounce(searchQuery, 300)
 
@@ -135,7 +135,7 @@ const Home = () => {
     }
 
     const handleLoadMore = () => {
-        setVisibleCount(prev => Math.min(prev + 8, allTopics.length))
+        setVisibleCount(prev => Math.min(prev + 5, allTopics.length))
     }
 
     const handleSearch = (query) => {
@@ -151,17 +151,17 @@ const Home = () => {
                 className="space-y-8"
             >
                 <div className="text-center space-y-4">
-                    <h1 className="text-4xl font-bold text-gray-800">
+                    <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-100">
                         What do you want to learn today?
                     </h1>
-                    <p className="text-gray-600 max-w-2xl mx-auto">
+                    <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                         Explore our vast collection of topics and start learning at your own pace
                     </p>
                 </div>
                 
                 <SearchBar onSearch={handleSearch} />
 
-                <div className="min-h-[120px]">
+                <div className="min-h-[20px]">
                     <AnimatePresence mode="sync">
                         {visibleTopics.length > 0 ? (
                             <motion.div 
