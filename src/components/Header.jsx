@@ -2,8 +2,10 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useTheme } from '../context/ThemeContext'
 import { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
+    const navigate = useNavigate()
     const { isDarkMode, toggleTheme } = useTheme()
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const [topicSuggestion, setTopicSuggestion] = useState('')
@@ -39,15 +41,17 @@ const Header = () => {
     }
 
     return (
-        <div className="flex items-center justify-between shadow-md dark:bg-gray-800 transition-colors duration-200">
+        <div className="flex items-center justify-between shadow-md dark:bg-gray-800 transition-colors duration-200 px-4 md:px-6 lg:px-8">
             <Toaster 
                 position="top-center"
                 toastOptions={{
                     className: 'dark:bg-gray-800 dark:text-white',
                 }} 
             />
-            <h1 className="m-3 text-4xl font-extrabold text-blue-900 dark:text-blue-400">Pro Learning</h1>
-            <div className="flex items-center gap-4 m-3">
+            <h1 
+            onClick={()=>navigate('/')}
+            className="m-3 text-2xl sm:text-3xl md:text-4xl font-extrabold cursor-pointer text-blue-900 dark:text-blue-400">Pro Learning</h1>
+            <div className="flex items-center gap-2 sm:gap-4 m-3">
             <div className="relative">
                     <motion.button
                         onClick={toggleTheme}
@@ -89,11 +93,12 @@ const Header = () => {
                 <div className="relative">
                     <motion.button
                         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                        className="px-4 py-2 text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 rounded-lg hover:bg-blue-600 dark:hover:bg-blue-900 hover:text-white transition font-medium"
+                        className="px-4 py-2 text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 rounded-lg hover:bg-blue-600 dark:hover:bg-blue-900 hover:text-white transition font-medium flex items-center"
                         whileTap={{ scale: 0.95 }}
                         transition={spring}
                     >
-                        ADD TOPIC
+                        <span className="md:hidden text-xl">+</span>
+                        <span className="hidden md:inline">ADD NEW TOPIC</span>
                     </motion.button>
                     <AnimatePresence>
                         {isDropdownOpen && (
@@ -102,7 +107,7 @@ const Header = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -10 }}
                                 transition={{ duration: 0.2 }}
-                                className="absolute right-0 mt-2 w-72 bg-white dark:bg-gray-800 rounded-lg shadow-lg border dark:border-gray-700 p-4"
+                                className="absolute right-0 mt-2 w-72 sm:w-80 md:w-96 bg-white dark:bg-gray-800 rounded-lg shadow-lg border dark:border-gray-700 p-4"
                             >
                                 <input
                                     type="text"
@@ -116,7 +121,7 @@ const Header = () => {
                                     onChange={(e) => setConcepts(e.target.value)}
                                     placeholder="Enter concepts..."
                                     rows="10"
-                                    className="w-full px-3 py-2 mb-3 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:border-blue-500 resize-none custom-scrollbar"
+                                    className="w-full px-3 py-2 mb-3 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:border-blue-500 resize-none custom-scrollbar text-sm sm:text-base"
                                 />
                                 <motion.button
                                     onClick={handleSuggest}

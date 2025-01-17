@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import SearchBar from '../components/searchBar/SearchBar'
 import useDebounce from '../hooks/useDebounce'
+import { useNavigate } from 'react-router-dom'
 
 const NoResultsFound = ({ searchQuery }) => (
     <motion.div 
@@ -37,6 +38,9 @@ const NoResultsFound = ({ searchQuery }) => (
 )
 
 const Home = () => {
+
+    const navigate = useNavigate()
+
     const allTopics = [
         {
             name: 'JavaScript',
@@ -177,7 +181,8 @@ const Home = () => {
                                     <motion.div
                                         key={topic.name}
                                         variants={item}
-                                        className={`${topic.bgColor} rounded-lg p-4 cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105`}
+                                        onClick={() => navigate(`/topic/${topic.name}`)}
+                                        className={`${topic.bgColor} rounded-lg p-4 cursor-pointer hover:shadow-xl dark:hover:shadow-gray-700 transition-all duration-300`}
                                     >
                                         <h3 className={`text-lg font-semibold ${topic.textColor} text-center`}>
                                             {topic.name}
