@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import SearchBar from '../components/searchBar/SearchBar'
-import useDebounce from '../hooks/useDebounce'
+import SearchBar from '../../components/searchBar/SearchBar'
+import useDebounce from '../../hooks/useDebounce'
 import { useNavigate } from 'react-router-dom'
 
 const NoResultsFound = ({ searchQuery }) => (
